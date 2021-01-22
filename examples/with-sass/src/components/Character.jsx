@@ -6,6 +6,7 @@ import SearchTooltip from "../assets/images/searchTooltip.png";
 import SearchingTooltip from "../assets/images/searchingTooltip.png";
 import LeftLeg from "../assets/images/ashLeftLeg.png";
 import RightLeg from "../assets/images/ashRightLeg.png";
+import TooltipError from "../assets/images/tooltipError.png";
 
 const Character = (props) => {
 
@@ -18,13 +19,13 @@ const Character = (props) => {
     const [side, setSide] = useState(false);
 
     useEffect(() => {
-        if(isLoading) {
-            setTimeout(() => {setSide(!side)}, 500);
+        if (isLoading) {
+            setTimeout(() => { setSide(!side) }, 500);
         }
     })
 
     const getImage = () => {
-        if(!isLoading) {
+        if (!isLoading) {
             return AshFront;
         } else {
             return side ? LeftLeg : RightLeg;
@@ -32,9 +33,9 @@ const Character = (props) => {
     }
 
     return (
-        <div className="character" onMouseLeave={() => setSearchTooltip(false)} onClick={() => dispatch(props.characterClick())}>
-            {!isLoading && 
-                <img className={`character__search ${searchTooltip ? "character__search--active" : ""}`} alt="Search" src={SearchTooltip} />
+        <div className="character" onMouseLeave={() => setSearchTooltip(false)} onClick={props.isPokedexFull ? () => { } : () => dispatch(props.characterClick())}>
+            {!isLoading &&
+                <img className={`character__search ${searchTooltip ? "character__search--active" : ""}`} alt="Search" src={props.isPokedexFull ? TooltipError : SearchTooltip} />
             }
             <img className={`character__searching ${isLoading ? "character__searching--active" : ""}`} alt="Searching" src={SearchingTooltip} />
             <img className="character__ash" alt="Ash Ketchum" src={getImage()} onMouseOver={() => setSearchTooltip(true)} />

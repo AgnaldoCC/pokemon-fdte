@@ -1,17 +1,37 @@
 const INITIAL_STATE = {
     pokemons: [],
+    currentPokemon: {},
+    currentPokemonPosition: -1,
     isLoading: false,
-    modalOpen: false
+    modalInfoOpen: false
 }
 
 function MapReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case "SET_LOADING":
-            return { ...state, isLoading: true }
+            return { ...state, isLoading: true, modalInfoOpen: false }
         case "GET_POKEMON":
-            return { ...state, pokemons: [...state.pokemons, action.payload], isLoading: false }
-        case "TOGGLE_MODAL":
-            return { ...state, modalOpen: action.payload }
+            return { ...state, isLoading: false, currentPokemon: action.payload }
+        case "TOGGLE_MODAL_INFO":
+            if (!action.payload) {
+                return { ...state, modalInfoOpen: action.payload, currentPokemon: {}, currentPokemonPosition: -1 }
+            } else {
+                return { ...state, modalInfoOpen: action.payload }
+            }
+        case "SET_CURRENT_POKEMON":
+            return { ...state, currentPokemon: action.payload }
+        case "SET_POKEMON_POSITION": {
+            return { ...state, currentPokemonPosition: action.payload }
+        }
+        case "CAPTURE_POKEMON": {
+            return { ...state, pokemons: [...state.pokemons, action.payload], modalInfoOpen: false }
+        }
+        case "RELEASE_POKEMON": {
+            const newPokemons = state.pokemons.filter((e, i) => {
+                return i !== action.payload;
+            })
+            return { ...state, pokemons: newPokemons , modalInfoOpen: false, currentPokemonPosition: -1 }
+        }
         default:
             return state;
     }

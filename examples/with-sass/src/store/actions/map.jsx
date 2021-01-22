@@ -3,15 +3,16 @@ import axios from "axios";
 const searchPokemon = () => async (dispatch) => {
     dispatch(setLoading());
     const randomNumber =  Math.floor(Math.random() * (807 - 1)) + 1;
-    return await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`).then((response) => {
+    const pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`).then((response) => {
         setTimeout(() => {
-            dispatch(toggleModal(true));
+            dispatch(toggleModalInfo(true));
             return dispatch({
                 type: "GET_POKEMON",
                 payload : response.data
             })
         }, 2000)
-    })
+    });
+    return pokemon;
 }
 
 const setLoading = () => dispatch => {
@@ -20,11 +21,39 @@ const setLoading = () => dispatch => {
     })   
 }
 
-const toggleModal = (action = false) => {
+const toggleModalInfo = (action = false) => {
     return {
-        type: "TOGGLE_MODAL",
+        type: "TOGGLE_MODAL_INFO",
         payload: action
     }
 }
 
-export { searchPokemon, toggleModal };
+const setCurrentPokemon = (pokemon) => {
+    return {
+        type: "SET_CURRENT_POKEMON",
+        payload: pokemon
+    }
+}
+
+const setPokemonPosition = (index) => {
+    return {
+        type: "SET_POKEMON_POSITION",
+        payload: index
+    }
+}
+
+const capturePokemon = (pokemon) => {
+    return {
+        type: "CAPTURE_POKEMON",
+        payload: pokemon
+    }
+}
+
+const releasePokemon = (index) => {
+    return {
+        type: "RELEASE_POKEMON",
+        payload: index
+    }
+}
+
+export { searchPokemon, toggleModalInfo, setCurrentPokemon, capturePokemon, releasePokemon, setPokemonPosition };

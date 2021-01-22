@@ -1,0 +1,20 @@
+{
+    "normal": {"name": "normal", "color": "#A8A77A"},
+    "fire": {"name": "fogo", "color": "#EE8130"},
+    "water": {"name": "água", "color": "#6390F0"},
+    "electric": {"name": "elétrico", "color": "#F7D02C"},
+    "grass": {"name": "grama", "color": "#7AC74C"},
+    "ice": {"name": "gelo", "color": "#96D9D6"},
+    "fighting": {"name": "lutador", "color": "#C22E28"},
+    "poison": {"name": "veneno", "color": "#A33EA1"},
+    "ground": {"name": "terra", "color": "#E2BF65"},
+    "flying": {"name": "voador", "color": "#A98FF3"},
+    "psychic": {"name": "psíquico", "color": "#F95587"},
+    "bug": {"name": "inseto", "color": "#A6B91A"},
+    "rock": {"name": "pedra", "color": "#B6A136"},
+    "ghost": {"name": "fantasma", "color": "#735797"},
+    "dragon": {"name": "dragão", "color": "#6F35FC"},
+    "dark": {"name": "escuridão", "color": "#705746"},
+    "steel": {"name": "ferro", "color": "#B7B7CE"},
+    "fairy": {"name": "fada", "color": "#D685AD"}
+}

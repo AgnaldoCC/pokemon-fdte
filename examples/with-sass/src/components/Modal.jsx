@@ -1,26 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import closeIcon from '../assets/images/close.png';
+import { useSelector } from 'react-redux';
+
+import InfoModal from "./InfoModal";
 
 const Modal = (props) => {
-    return (
-        <>
-            {props.isOpen &&
-                <div className="modal">
-                    <div className="modal__content">
-                        <img className="modal__close" src={closeIcon} alt="Fechar" onClick={() => props.closeModal()} />
-                        {props.children}
-                    </div>
-                </div>
 
-            }
-        </>
+    const currentPokemon = useSelector(state => state.map.currentPokemon);
+    const currentPokemonPosition = useSelector(state => state.map.currentPokemonPosition);
+
+    const isCaptured = props.pokemons.find(e => e.id === currentPokemon.id)
+
+    const isEmpty = (obj) => {
+        return Object.keys(obj).length === 0 && obj.constructor === Object
+    }
+
+    return (
+        <InfoModal isOpen={props.isOpen && !isEmpty(currentPokemon)} closeModal={props.closeModal} currentPokemon={currentPokemon} currentPokemonPosition = {currentPokemonPosition}  isCaptured={isCaptured}/>
     );
 }
-
-
-Modal.propTypes = {
-    children: PropTypes.node.isRequired,
-};
 
 export default Modal;

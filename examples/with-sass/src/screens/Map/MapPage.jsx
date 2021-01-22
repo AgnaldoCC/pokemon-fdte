@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { searchPokemon, toggleModal as toggleModalAction } from "../../store/actions/map";
+import { searchPokemon, toggleModalInfo as toggleModalAction } from "../../store/actions/map";
 
 import Sidebar from '../../components/Sidebar';
 import Modal from '../../components/Modal';
@@ -11,21 +11,19 @@ const MapPage = () => {
 
     const dispatch = useDispatch();
 
-    const modalOpen = useSelector(state => state.map.modalOpen);
-
+    const modalInfoOpen = useSelector(state => state.map.modalInfoOpen);
+    const pokemons = useSelector(state => state.map.pokemons);
 
     const toggleModal = () => {
-        dispatch(toggleModalAction(!modalOpen))
+        dispatch(toggleModalAction(!modalInfoOpen))
     }
 
     return (
         <>
             <div className="map">
-                <Sidebar />
-                <Character characterClick={searchPokemon} toggleModal={toggleModal} />
-                <Modal isOpen={modalOpen} closeModal={toggleModal}>
-                    <div style={{ height: '30rem', width: '30rem' }} />
-                </Modal>
+                <Sidebar pokemons={pokemons} pokemonItemClick={toggleModal} />
+                <Character characterClick={searchPokemon} toggleModal={toggleModal} isPokedexFull={pokemons.length >= 6}/>
+                <Modal isOpen={modalInfoOpen} closeModal={toggleModal} pokemons={pokemons} />
             </div>
         </>
     );

@@ -23,4 +23,9 @@
         height: 6.4rem;
         border: 4px solid $color-action-dark;
     }
+
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 }
