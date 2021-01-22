@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextInput = ({ className, label, placeholder, name }) => {
+const TextInput = ({ className, label, placeholder, name, value, onChange }) => {
 
     return (
         <div className={`${className} input__container`}>
@@ -9,7 +9,7 @@ const TextInput = ({ className, label, placeholder, name }) => {
                     {label}
                 </label>
             )}
-            <input className="input" type="text" placeholder={placeholder} name={name} />
+            <input className="input" type="text" placeholder={placeholder} name={name} value={value} onChange={onChange} />
         </div>
     )
 };

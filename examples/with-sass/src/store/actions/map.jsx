@@ -2,13 +2,13 @@ import axios from "axios";
 
 const searchPokemon = () => async (dispatch) => {
     dispatch(setLoading());
-    const randomNumber =  Math.floor(Math.random() * (807 - 1)) + 1;
+    const randomNumber = Math.floor(Math.random() * (807 - 1)) + 1;
     const pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`).then((response) => {
         setTimeout(() => {
             dispatch(toggleModalInfo(true));
             return dispatch({
                 type: "GET_POKEMON",
-                payload : response.data
+                payload: response.data
             })
         }, 2000)
     });
@@ -18,7 +18,7 @@ const searchPokemon = () => async (dispatch) => {
 const setLoading = () => dispatch => {
     return dispatch({
         type: "SET_LOADING"
-    })   
+    })
 }
 
 const toggleModalInfo = (action = false) => {
@@ -56,4 +56,11 @@ const releasePokemon = (index) => {
     }
 }
 
-export { searchPokemon, toggleModalInfo, setCurrentPokemon, capturePokemon, releasePokemon, setPokemonPosition };
+const changePokemonName = (name, position) => {
+    return {
+        type: "CHANGE_POKEMON_NAME",
+        payload: { name, position }
+    }
+}
+
+export { searchPokemon, toggleModalInfo, setCurrentPokemon, capturePokemon, releasePokemon, setPokemonPosition, changePokemonName };

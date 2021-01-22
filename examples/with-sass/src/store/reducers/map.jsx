@@ -32,6 +32,15 @@ function MapReducer(state = INITIAL_STATE, action) {
             })
             return { ...state, pokemons: newPokemons , modalInfoOpen: false, currentPokemonPosition: -1 }
         }
+        case "CHANGE_POKEMON_NAME": {
+            const newPokemons = state.pokemons.map((e, i) => {
+                if(action.payload.position === i) {
+                    e.name = action.payload.name;
+                }
+                return e;
+            })
+            return { ...state, pokemons: newPokemons, currentPokemon: {...state.currentPokemon, name: action.payload.name} }
+        }
         default:
             return state;
     }
