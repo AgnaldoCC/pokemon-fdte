@@ -1,3 +1,41 @@
 .home {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    width: 100vw;
+    height: 100vh;
+    &__wrapper {
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 
+    &__logo {
+        margin-bottom: 32px;
+    }
+
+    &__start {
+        margin: 0 auto;
+        width: 124px;
+        height: 56px;
+        border-radius: 42px;
+        background: #ff3d71;
+        color: #ffffff;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: uppercase;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
 }

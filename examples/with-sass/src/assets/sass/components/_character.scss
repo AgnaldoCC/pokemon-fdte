@@ -1,0 +1,43 @@
+.character {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    &__search {
+        opacity: 0;
+        visibility: hidden;
+        cursor: pointer;
+
+        &--active {
+            visibility: visible;
+            opacity: 1;
+            transition: 0.3s all ease-in-out;
+            transform: translateY(-5px);
+        }
+    }
+
+    &__searching {
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        cursor: pointer;
+
+        &--active {
+            visibility: visible;
+            opacity: 1;
+            transition: 0.3s all ease-in-out;
+            height: auto;
+        }
+    }
+
+    &__ash {
+        cursor: pointer;
+    }
+}
