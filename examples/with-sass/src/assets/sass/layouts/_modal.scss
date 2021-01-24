@@ -59,6 +59,12 @@
 
         &--captured {
             height: initial;
+
+            .modal__abilities {
+                padding-bottom: 0;
+            }
+
+
         }
 
         @media screen and (min-width: 1024px) {
@@ -240,6 +246,11 @@
         justify-content: center;
         margin-bottom: 5rem;
 
+        @media screen  and (min-width: 1024px){
+            margin-bottom: unset;
+            padding-bottom: 10rem;
+        }
+
         &--ability {
             font-family: Open Sans;
             font-style: normal;
@@ -308,6 +319,7 @@
 
         &--button {
             background: #ff3d71;
+            cursor: pointer;
             border-radius: 42px;
             font-family: Open Sans;
             font-style: normal;

@@ -40,7 +40,10 @@ const InfoModal = ({ closeModal, currentPokemon, currentPokemonPosition, isOpen,
             {isOpen &&
                 <div className="modal">
                     <div className="modal__content">
-                        <img className="modal__close" src={closeIcon} alt="Fechar" onClick={() => closeModal()} />
+                        <img className="modal__close" src={closeIcon} alt="Fechar" onClick={() => { 
+                            closeModal();
+                            setEditingName(false);
+                            }} />
                         <div className="modal__top" />
                         <div className={`modal__body ${isCaptured ? "modal__body--captured" : ""}`}>
                             <div className="modal__image">
