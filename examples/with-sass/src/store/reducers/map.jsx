@@ -3,7 +3,8 @@ const INITIAL_STATE = {
     currentPokemon: {},
     currentPokemonPosition: -1,
     isLoading: false,
-    modalInfoOpen: false
+    modalInfoOpen: false,
+    modalRegisterOpen: false
 }
 
 function MapReducer(state = INITIAL_STATE, action) {
@@ -14,9 +15,11 @@ function MapReducer(state = INITIAL_STATE, action) {
             return { ...state, isLoading: false, currentPokemon: action.payload }
         case "TOGGLE_MODAL_INFO":
             if (!action.payload) {
+                alert(1)
                 return { ...state, modalInfoOpen: action.payload, currentPokemon: {}, currentPokemonPosition: -1 }
             } else {
-                return { ...state, modalInfoOpen: action.payload }
+                alert(2)
+                return { ...state, modalInfoOpen: action.payload, currentPokemonPosition: state.pokemons.length  }
             }
         case "SET_CURRENT_POKEMON":
             return { ...state, currentPokemon: action.payload }
@@ -24,13 +27,13 @@ function MapReducer(state = INITIAL_STATE, action) {
             return { ...state, currentPokemonPosition: action.payload }
         }
         case "CAPTURE_POKEMON": {
-            return { ...state, pokemons: [...state.pokemons, action.payload], modalInfoOpen: false }
+            return { ...state, pokemons: [...state.pokemons, action.payload], modalInfoOpen: false, currentPokemonPosition: -1, currentPokemon: {} }
         }
         case "RELEASE_POKEMON": {
             const newPokemons = state.pokemons.filter((e, i) => {
                 return i !== action.payload;
             })
-            return { ...state, pokemons: newPokemons , modalInfoOpen: false, currentPokemonPosition: -1 }
+            return { ...state, pokemons: newPokemons , modalInfoOpen: false, currentPokemonPosition: -1, currentPokemon: {} }
         }
         case "CHANGE_POKEMON_NAME": {
             const newPokemons = state.pokemons.map((e, i) => {
@@ -41,6 +44,12 @@ function MapReducer(state = INITIAL_STATE, action) {
             })
             return { ...state, pokemons: newPokemons, currentPokemon: {...state.currentPokemon, name: action.payload.name} }
         }
+        case "TOGGLE_MODAL_REGISTER":
+            if (!action.payload) {
+                return { ...state, modalInfoOpen: false, currentPokemon: {}, currentPokemonPosition: -1, modalRegisterOpen: false }
+            } else {
+                return { ...state, modalInfoOpen: false, modalRegisterOpen: true }
+            }
         default:
             return state;
     }

@@ -36,109 +36,104 @@ const InfoModal = ({ closeModal, currentPokemon, currentPokemonPosition, isOpen,
     }, [currentPokemon.name])
 
     return (
-        <>
-            {isOpen &&
-                <div className="modal">
-                    <div className="modal__content">
-                        <img className="modal__close" src={closeIcon} alt="Fechar" onClick={() => { 
-                            closeModal();
-                            setEditingName(false);
-                            }} />
-                        <div className="modal__top" />
-                        <div className={`modal__body ${isCaptured ? "modal__body--captured" : ""}`}>
-                            <div className="modal__image">
-                                <img className="modal__pokemonImage" alt="Pokemon Image" src={currentPokemon.sprites.front_default} />
-                            </div>
-                            <div className="modal__name">
-                                {!editingName &&
-                                    <>
-                                        <p className="modal__name--name">{pokemonName}</p>
-                                        <img className="modal__name--icon" alt="Change Name" src={EditIcon} onClick={() => setEditingName(true)} />
-                                    </>
-                                }
-                                {editingName &&
-                                    <>
-                                        <TextInput className="modal__name--input" name="Pokemon Name" value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
-                                        <div className="modal__name--buttonIcon modal__name--confirm" onClick={(e) => {
-                                            dispatch(changePokemonName(pokemonName, currentPokemonPosition))
-                                            setEditingName(false)
-                                        }}>
-                                            <img alt="Confirm icon" src={Confirm} />
-                                        </div>
-                                        <div className="modal__name--buttonIcon modal__name--close" onClick={() => {
-                                            setEditingName(false);
-                                            setPokemonName(currentPokemon.name)
+        <div className="modal">
+            <div className="modal__content">
+                <img className="modal__close" src={closeIcon} alt="Fechar" onClick={() => {
+                    closeModal();
+                    setEditingName(false);
+                }} />
+                <div className="modal__top" />
+                <div className={`modal__body ${isCaptured ? "modal__body--captured" : ""}`}>
+                    <div className="modal__image">
+                        <img className="modal__pokemonImage" alt="Pokemon Image" src={currentPokemon.sprites.front_default} />
+                    </div>
+                    <div className="modal__name">
+                        {!editingName &&
+                            <>
+                                <p className="modal__name--name">{pokemonName}</p>
+                                <img className="modal__name--icon" alt="Change Name" src={EditIcon} onClick={() => setEditingName(true)} />
+                            </>
+                        }
+                        {editingName &&
+                            <>
+                                <TextInput className="modal__name--input" name="Pokemon Name" value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
+                                <div className="modal__name--buttonIcon modal__name--confirm" onClick={(e) => {
+                                    dispatch(changePokemonName(pokemonName, currentPokemonPosition))
+                                    setEditingName(false)
+                                }}>
+                                    <img alt="Confirm icon" src={Confirm} />
+                                </div>
+                                <div className="modal__name--buttonIcon modal__name--close" onClick={() => {
+                                    setEditingName(false);
+                                    setPokemonName(currentPokemon.name)
 
-                                        }}>
-                                            <img alt="Cancel icon" src={closeIcon} />
-                                        </div>
-                                    </>
-                                }
-                            </div>
-                            <div className="modal__stats">
-                                <div className="modal__stat modal__stat--hp">
-                                    <p className="modal__stat--title">HP</p>
-                                    <p className="modal__stat--value">{currentPokemon.stats[0].base_stat}/{currentPokemon.stats[0].base_stat}</p>
+                                }}>
+                                    <img alt="Cancel icon" src={closeIcon} />
                                 </div>
-                                <div className="modal__stat modal__stat--height">
-                                    <p className="modal__stat--title">Altura</p>
-                                    <p className="modal__stat--value">{currentPokemon.height} m</p>
-                                </div>
-                                <div className="modal__stat modal__stat--weight">
-                                    <p className="modal__stat--title">Peso</p>
-                                    <p className="modal__stat--value">{currentPokemon.weight} kg</p>
-                                </div>
-                            </div>
-                            <div className="modal__line">
-                                <div className="modal__line--line" />
-                                <label className="modal__line--label">Tipo</label>
-                            </div>
-                            <div className="modal__types">
-                                {currentPokemon.types.map((e, i) => {
-                                    return <label key={i} className={`modal__types--type modal__types--type--${e.type.name}`} style={{ marginRight: i % 2 === 0 ? "10px" : "0", background: translations[e.type.name].color }}>{translations[e.type.name].name}</label>
-                                })}
-                            </div>
-                            <div className="modal__line">
-                                <div className="modal__line--line" />
-                                <label className="modal__line--label">Habilidades</label>
-                            </div>
-                            <div className="modal__abilities">
-                                {currentPokemon.abilities.map((e, i) => {
-                                    return <label key={i} className="modal__abilities--ability">{`${e.ability.name}${i < currentPokemon.abilities.length - 1 ? ", " : ""}`} </label>
-                                })}
-                            </div>
-                            {!isCaptured &&
-                                <div className="modal__pokeball" onClick={() => dispatch(capturePokemon(currentPokemon))}>
-                                    <img className="modal__pokeball--img" alt="Pokeball" src={Pokeball} />
-                                </div>
-                            }
-
-                            {isCaptured &&
-                                <div className="modal__statistics">
-                                    <div className="modal__line">
-                                        <div className="modal__line--line" />
-                                        <label className="modal__line--label">Estatísticas</label>
-                                    </div>
-                                    {stats.map((e, i) => {
-                                        return (
-                                            <div key={i} className="modal__statistics--row">
-                                                <img className="modal__statistics--row--icon" alt="Stat icon" src={e.icon} />
-                                                <label className="modal__statistics--row--name">{e.name}</label>
-                                                <label className="modal__statistics--row--value">{e.value}</label>
-                                            </div>
-                                        )
-                                    })}
-                                    <button className="modal__statistics--button" onClick={() => dispatch(releasePokemon(currentPokemonPosition))}>Liberar Pokemon</button>
-                                </div>
-
-                            }
-
+                            </>
+                        }
+                    </div>
+                    <div className="modal__stats">
+                        <div className="modal__stat modal__stat--hp">
+                            <p className="modal__stat--title">HP</p>
+                            <p className="modal__stat--value">{currentPokemon.stats[0].base_stat}/{currentPokemon.stats[0].base_stat}</p>
+                        </div>
+                        <div className="modal__stat modal__stat--height">
+                            <p className="modal__stat--title">Altura</p>
+                            <p className="modal__stat--value">{currentPokemon.height} m</p>
+                        </div>
+                        <div className="modal__stat modal__stat--weight">
+                            <p className="modal__stat--title">Peso</p>
+                            <p className="modal__stat--value">{currentPokemon.weight} kg</p>
                         </div>
                     </div>
-                </div>
+                    <div className="modal__line">
+                        <div className="modal__line--line" />
+                        <label className="modal__line--label">Tipo</label>
+                    </div>
+                    <div className="modal__types">
+                        {currentPokemon.types.map((e, i) => {
+                            return <label key={i} className={`modal__types--type modal__types--type--${e.type.name}`} style={{ marginRight: i % 2 === 0 ? "10px" : "0", background: translations[e.type.name].color }}>{translations[e.type.name].name}</label>
+                        })}
+                    </div>
+                    <div className="modal__line">
+                        <div className="modal__line--line" />
+                        <label className="modal__line--label">Habilidades</label>
+                    </div>
+                    <div className="modal__abilities">
+                        {currentPokemon.abilities.map((e, i) => {
+                            return <label key={i} className="modal__abilities--ability">{`${e.ability.name}${i < currentPokemon.abilities.length - 1 ? ", " : ""}`} </label>
+                        })}
+                    </div>
+                    {!isCaptured &&
+                        <div className="modal__pokeball" onClick={() => dispatch(capturePokemon(currentPokemon))}>
+                            <img className="modal__pokeball--img" alt="Pokeball" src={Pokeball} />
+                        </div>
+                    }
 
-            }
-        </>
+                    {isCaptured &&
+                        <div className="modal__statistics">
+                            <div className="modal__line">
+                                <div className="modal__line--line" />
+                                <label className="modal__line--label">Estatísticas</label>
+                            </div>
+                            {stats.map((e, i) => {
+                                return (
+                                    <div key={i} className="modal__statistics--row">
+                                        <img className="modal__statistics--row--icon" alt="Stat icon" src={e.icon} />
+                                        <label className="modal__statistics--row--name">{e.name}</label>
+                                        <label className="modal__statistics--row--value">{e.value}</label>
+                                    </div>
+                                )
+                            })}
+                            <button className="modal__statistics--button" onClick={() => dispatch(releasePokemon(currentPokemonPosition))}>Liberar Pokemon</button>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        </div>
     );
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import InfoModal from "./InfoModal";
+import RegisterModal from "./RegisterModal";
 
 const Modal = (props) => {
 
@@ -15,7 +16,14 @@ const Modal = (props) => {
     }
 
     return (
-        <InfoModal isOpen={props.isOpen && !isEmpty(currentPokemon)} closeModal={props.closeModal} currentPokemon={currentPokemon} currentPokemonPosition = {currentPokemonPosition}  isCaptured={isCaptured}/>
+        <>
+            {props.isInfoOpen && !isEmpty(currentPokemon) && 
+                <InfoModal isInfoOpen={props.isInfoOpen} closeModal={props.closeModal} currentPokemon={currentPokemon} currentPokemonPosition={currentPokemonPosition} isCaptured={isCaptured} />
+            }
+            {props.isRegisterOpen && 
+                <RegisterModal />
+            }
+        </>
     );
 }
 

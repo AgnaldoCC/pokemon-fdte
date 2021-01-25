@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './Button';
 import plusIcon from '../assets/images/plus.png';
 
-import { setCurrentPokemon, setPokemonPosition } from "../store/actions/map";
+import { setCurrentPokemon, setPokemonPosition, toggleModalRegister } from "../store/actions/map";
 import { useDispatch } from 'react-redux';
 
 const Sidebar = (props) => {
@@ -13,6 +13,10 @@ const Sidebar = (props) => {
         dispatch(setCurrentPokemon(pokemon))
         dispatch(setPokemonPosition(index))
         props.pokemonItemClick();
+    }
+
+    const openModalRegister = () => {
+        dispatch(toggleModalRegister(true))
     }
 
     const renderItems = () => {
@@ -38,6 +42,7 @@ const Sidebar = (props) => {
         <div className="sidebar">
             {renderItems()}
             <Button
+                onClick={() => openModalRegister()}
                 disabled={props.pokemons.length >= 6}
                 icon={<img src={plusIcon} alt="+" />}
             />

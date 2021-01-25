@@ -12,6 +12,7 @@ const MapPage = () => {
     const dispatch = useDispatch();
 
     const modalInfoOpen = useSelector(state => state.map.modalInfoOpen);
+    const modalRegisterOpen = useSelector(state => state.map.modalRegisterOpen);
     const pokemons = useSelector(state => state.map.pokemons);
 
     const toggleModal = () => {
@@ -23,7 +24,7 @@ const MapPage = () => {
             <div className="map">
                 <Sidebar pokemons={pokemons} pokemonItemClick={toggleModal} />
                 <Character characterClick={searchPokemon} toggleModal={toggleModal} isPokedexFull={pokemons.length >= 6}/>
-                <Modal isOpen={modalInfoOpen} closeModal={toggleModal} pokemons={pokemons} />
+                <Modal isInfoOpen={modalInfoOpen} isRegisterOpen={modalRegisterOpen} closeModal={toggleModal} pokemons={pokemons} />
             </div>
         </>
     );
