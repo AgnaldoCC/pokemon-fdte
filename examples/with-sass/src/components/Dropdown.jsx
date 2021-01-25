@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import chevron from '../assets/images/chevronDownBlack.png';
 
 const Dropdown = ({ options, types, setTypes, removeType }) => {

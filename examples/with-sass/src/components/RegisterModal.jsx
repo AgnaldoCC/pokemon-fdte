@@ -22,7 +22,7 @@ const RegisterModal = ({ closeModal }) => {
 
     const dispatch = useDispatch();
 
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const [types, setTypes] = useState([]);
 
