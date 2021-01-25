@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import closeIcon from '../assets/images/close.png';
 import Pokeball from "../assets/images/pokeball.png";
@@ -8,6 +7,7 @@ import Sword from "../assets/images/sword.png";
 import Speed from "../assets/images/speed.png";
 import EditIcon from "../assets/images/editIcon.png";
 import Confirm from "../assets/images/checkIcon.png";
+import NoImage from "../assets/images/noImage.jpg";
 
 import TextInput from "./TextInput";
 
@@ -16,7 +16,7 @@ import translations from "../assets/utils/translations.json";
 import { capturePokemon, changePokemonName, releasePokemon } from "../store/actions/map";
 import { useDispatch } from 'react-redux';
 
-const InfoModal = ({ closeModal, currentPokemon, currentPokemonPosition, isOpen, isCaptured }) => {
+const InfoModal = ({ closeModal, currentPokemon, currentPokemonPosition, isCaptured }) => {
 
     const dispatch = useDispatch();
 
@@ -45,13 +45,15 @@ const InfoModal = ({ closeModal, currentPokemon, currentPokemonPosition, isOpen,
                 <div className="modal__top" />
                 <div className={`modal__body ${isCaptured ? "modal__body--captured" : ""}`}>
                     <div className="modal__image">
-                        <img className="modal__pokemonImage" alt="Pokemon Image" src={currentPokemon.sprites.front_default} />
+                        <img className="modal__pokemonImage" alt="Pokemon" src={currentPokemon.sprites.front_default ? currentPokemon.sprites.front_default : NoImage} />
                     </div>
                     <div className="modal__name">
                         {!editingName &&
                             <>
                                 <p className="modal__name--name">{pokemonName}</p>
-                                <img className="modal__name--icon" alt="Change Name" src={EditIcon} onClick={() => setEditingName(true)} />
+                                {isCaptured && currentPokemon.id <= 807 &&
+                                    <img className="modal__name--icon" alt="Change Name" src={EditIcon} onClick={() => setEditingName(true)} />
+                                }
                             </>
                         }
                         {editingName &&
@@ -93,7 +95,7 @@ const InfoModal = ({ closeModal, currentPokemon, currentPokemonPosition, isOpen,
                     </div>
                     <div className="modal__types">
                         {currentPokemon.types.map((e, i) => {
-                            return <label key={i} className={`modal__types--type modal__types--type--${e.type.name}`} style={{ marginRight: i % 2 === 0 ? "10px" : "0", background: translations[e.type.name].color }}>{translations[e.type.name].name}</label>
+                            return <label key={i} className={`modal__types--type modal__types--type--${e.type.name}`} style={{ marginRight: i % 2 === 0 ? "10px" : "0", background: translations[e.type.name].color }}>{translations[e.type.name].text}</label>
                         })}
                     </div>
                     <div className="modal__line">
@@ -102,7 +104,7 @@ const InfoModal = ({ closeModal, currentPokemon, currentPokemonPosition, isOpen,
                     </div>
                     <div className="modal__abilities">
                         {currentPokemon.abilities.map((e, i) => {
-                            return <label key={i} className="modal__abilities--ability">{`${e.ability.name}${i < currentPokemon.abilities.length - 1 ? ", " : ""}`} </label>
+                            return <label key={i} className="modal__abilities--ability">{`${e.ability.name || ""}${e.ability.name ? "," : ""}`} </label>
                         })}
                     </div>
                     {!isCaptured &&
@@ -136,11 +138,5 @@ const InfoModal = ({ closeModal, currentPokemon, currentPokemonPosition, isOpen,
         </div>
     );
 }
-
-
-InfoModal.propTypes = {
-    closeModal: PropTypes.func.isRequired,
-    isOpen: PropTypes.bool.isRequired
-};
 
 export default InfoModal;

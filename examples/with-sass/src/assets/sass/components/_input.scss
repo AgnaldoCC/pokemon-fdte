@@ -16,6 +16,13 @@
     &__container {
         display: flex;
         flex-direction: column;
+
+        &--row {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 5px;
+        }
     }
 
     &__label {
@@ -24,6 +31,11 @@
         font-weight: bold;
         font-size: 1.2rem;
         line-height: 1.6rem;
+        margin: 0;
+
+        &--text {
+            margin-bottom: 5px;
+        }
     }
 
     &__suffix {
@@ -57,7 +69,7 @@
 
     &__increase,
     &__decrease {
-        width: 2.1rem;
+        width: 2.6rem;
         transition: all .2s;
 
         &:hover {

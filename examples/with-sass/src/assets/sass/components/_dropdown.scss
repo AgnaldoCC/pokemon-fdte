@@ -14,6 +14,28 @@
 
     &__container {
         position: relative;
+
+        &--types {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-bottom: 15px;
+            }
+        }
+
+        &--row {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            &--close {
+                position: absolute;
+                right: 1rem;
+                cursor: pointer;
+            }
+        }
     }
 
     &__icon {

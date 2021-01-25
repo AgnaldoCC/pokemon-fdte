@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { searchPokemon, toggleModalInfo as toggleModalAction } from "../../store/actions/map";
+import { searchPokemon, toggleModalInfo as toggleModalInfoAction, toggleModalRegister as toggleModalRegisterAction } from "../../store/actions/map";
 
 import Sidebar from '../../components/Sidebar';
 import Modal from '../../components/Modal';
@@ -15,16 +15,20 @@ const MapPage = () => {
     const modalRegisterOpen = useSelector(state => state.map.modalRegisterOpen);
     const pokemons = useSelector(state => state.map.pokemons);
 
-    const toggleModal = () => {
-        dispatch(toggleModalAction(!modalInfoOpen))
+    const toggleModalInfo = () => {
+        dispatch(toggleModalInfoAction(!modalInfoOpen))
+    }
+
+    const toggleModalRegister = () => {
+        dispatch(toggleModalRegisterAction(!modalRegisterOpen))
     }
 
     return (
         <>
             <div className="map">
-                <Sidebar pokemons={pokemons} pokemonItemClick={toggleModal} />
-                <Character characterClick={searchPokemon} toggleModal={toggleModal} isPokedexFull={pokemons.length >= 6}/>
-                <Modal isInfoOpen={modalInfoOpen} isRegisterOpen={modalRegisterOpen} closeModal={toggleModal} pokemons={pokemons} />
+                <Sidebar pokemons={pokemons} pokemonItemClick={toggleModalInfo} />
+                <Character characterClick={searchPokemon} toggleModal={toggleModalInfo} isPokedexFull={pokemons.length >= 6}/>
+                <Modal isInfoOpen={modalInfoOpen} isRegisterOpen={modalRegisterOpen} closeModalInfo={toggleModalInfo} closeModalRegister={toggleModalRegister} pokemons={pokemons} />
             </div>
         </>
     );

@@ -15,11 +15,9 @@ function MapReducer(state = INITIAL_STATE, action) {
             return { ...state, isLoading: false, currentPokemon: action.payload }
         case "TOGGLE_MODAL_INFO":
             if (!action.payload) {
-                alert(1)
                 return { ...state, modalInfoOpen: action.payload, currentPokemon: {}, currentPokemonPosition: -1 }
             } else {
-                alert(2)
-                return { ...state, modalInfoOpen: action.payload, currentPokemonPosition: state.pokemons.length  }
+                return { ...state, modalInfoOpen: action.payload  }
             }
         case "SET_CURRENT_POKEMON":
             return { ...state, currentPokemon: action.payload }

@@ -5,7 +5,6 @@ const searchPokemon = () => async (dispatch) => {
     const randomNumber = Math.floor(Math.random() * (807 - 1)) + 1;
     const pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`).then((response) => {
         setTimeout(() => {
-            // dispatch(setCurrentPokemon(action.payload))
             dispatch(toggleModalInfo(true));
             return dispatch({
                 type: "GET_POKEMON",

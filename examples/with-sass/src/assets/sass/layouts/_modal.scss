@@ -21,6 +21,7 @@
         cursor: pointer;
     }
 
+    // Info Modal
     &__content {
         position: relative;
         background-color: $color-neutral;
@@ -63,13 +64,54 @@
             .modal__abilities {
                 padding-bottom: 0;
             }
+        }
 
-
+        &--register {
+            height: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-bottom: 5rem;
         }
 
         @media screen and (min-width: 1024px) {
             height: auto;
-            padding-top: 13rem;
+        }
+    }
+
+    &__previewImage {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border-radius: 10px;
+
+        &--remove {
+            position: relative;
+            top: 8rem;
+            bottom: 0;
+            left: 20rem;
+            right: 0;
+            margin: auto;
+            font-family: Open Sans;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 24px;
+            text-align: center;
+            color: #000000;
+            text-transform: uppercase;
+            z-index: 1;
+            pointer-events: all;
+            cursor: pointer;
+
+            @media screen  and (min-width: 1024px) {
+                top: 7rem;
+                left: 18rem;
+            }
         }
     }
 
@@ -83,6 +125,16 @@
         margin: auto;
         border: 4px solid $color-primary-default;
         border-radius: 50%;
+        background: #ffffff;
+        pointer-events: none;
+
+        &--input {
+            opacity: 0;
+            top: 0px;
+            pointer-events: all;
+            cursor: pointer;
+
+        }
     }
 
     &__pokemonImage {
@@ -92,8 +144,9 @@
         right: 0;
         bottom: 0;
         margin: auto;
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
     }
 
     &__name {
@@ -246,9 +299,9 @@
         justify-content: center;
         margin-bottom: 5rem;
 
-        @media screen  and (min-width: 1024px){
+        @media screen and (min-width: 1024px) {
             margin-bottom: unset;
-            padding-bottom: 10rem;
+            padding-bottom: 20rem;
         }
 
         &--ability {
@@ -337,6 +390,74 @@
             @media screen and (min-width: 1024px) {
                 top: calc(50% + 17rem);
             }
+        }
+    }
+
+    // Register Pokemon Modal
+
+    &__cameraImage {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        cursor: pointer;
+
+        &--plus {
+            margin-left: 18rem;
+            margin-top: 17rem;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+
+            @media screen and (min-width: 1024px) {
+                margin-left: 16rem;
+                margin-top: 14rem;
+            }
+        }
+    }
+
+    &__form {
+        &--text {
+            margin-bottom: 25px;
+        }
+
+        &--number {
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-family: Open Sans;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #2e3a59;
+        }
+
+        p {
+            font-family: Open Sans;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            color: #2e3a59;
+        }
+
+        .input {
+            font-family: Open Sans;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            color: #2e3a59;
+        }
+
+        .btn {
+            display: flex;
+            margin: 7rem auto;
+            height: 56px;
+            width: 80%;
+            align-items: center;
+            justify-content: center;
         }
     }
 }
